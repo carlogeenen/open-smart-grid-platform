@@ -26,6 +26,7 @@ public class SetAdministrativeStatusRequestFactory {
                 .setDeviceIdentification(requestParameters.get(PlatformSmartmeteringKeys.KEY_DEVICE_IDENTIFICATION));
         setAdministrativeStatusRequest.setEnabled(AdministrativeStatusType
                 .valueOf(requestParameters.get(PlatformSmartmeteringKeys.ADMINISTRATIVE_STATUS_TYPE)));
+        setAdministrativeStatusRequest.setMessage(requestParameters.get("Message"));
 
         return setAdministrativeStatusRequest;
     }

@@ -1,10 +1,10 @@
-@SmartMetering @Platform @SmartMeteringConfiguration
+@SmartMetering @Platform @SmartMeteringConfiguration @test
 Feature: SmartMetering Configuration - Administrative Status
   As a grid operator
   I want to be able to perform get or set the administrative status on a device
   So that it can be kept in sync with the wishes of the houshold the device is used
 
-  Background:
+  Background: 
     Given a dlms device
       | DeviceIdentification | TEST1024000000001 |
       | DeviceType           | SMART_METER_E     |
@@ -19,5 +19,13 @@ Feature: SmartMetering Configuration - Administrative Status
     When the set administrative status request is received
       | DeviceIdentification     | TEST1024000000001 |
       | AdministrativeStatusType | ON                |
+    Then the administrative status should be set on the device
+      | DeviceIdentification | TEST1024000000001 |
+
+  Scenario: Set administrative text
+    When the set administrative status request is received
+      | DeviceIdentification     | TEST1024000000001 |
+      | AdministrativeStatusType | ON                |
+      | Message                  | test P1           |
     Then the administrative status should be set on the device
       | DeviceIdentification | TEST1024000000001 |

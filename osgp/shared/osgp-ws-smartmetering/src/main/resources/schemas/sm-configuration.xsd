@@ -590,6 +590,7 @@
       <xsd:sequence>
         <xsd:element name="DeviceIdentification" type="common:DeviceIdentification" />
         <xsd:element name="Enabled" type="tns:AdministrativeStatusType" />
+        <xsd:element name="Message" type="xsd:String" />
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
