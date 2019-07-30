@@ -37,7 +37,6 @@ public class SetAdministrativeStatusRequestMessageProcessor extends DeviceReques
             final Serializable requestObject) throws OsgpException {
 
         this.assertRequestObjectType(AdministrativeStatusTypeDataDto.class, requestObject);
-        System.out.println("requestObject: " + requestObject.toString()); // requestobject is null
         final AdministrativeStatusTypeDataDto administrativeStatusType = (AdministrativeStatusTypeDataDto) requestObject;
 
         this.configurationService.requestSetAdministrativeStatus(conn, device, administrativeStatusType);

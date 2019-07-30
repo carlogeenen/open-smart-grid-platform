@@ -225,9 +225,6 @@ public class ConfigurationService {
         final AdministrativeStatusTypeDataDto administrativeStatusDto = this.configurationMapper
                 .map(administrativeStatusTypeData, AdministrativeStatusTypeDataDto.class);
 
-//        final AdministrativeStatusTypeDto administrativeStatusTypeDto = this.configurationMapper
-//                .map(administrativeStatusType, AdministrativeStatusTypeDto.class);
-
         final RequestMessage requestMessage = new RequestMessage(deviceMessageMetadata.getCorrelationUid(),
                 deviceMessageMetadata.getOrganisationIdentification(), deviceMessageMetadata.getDeviceIdentification(),
                 smartMeteringDevice.getIpAddress(), administrativeStatusDto);

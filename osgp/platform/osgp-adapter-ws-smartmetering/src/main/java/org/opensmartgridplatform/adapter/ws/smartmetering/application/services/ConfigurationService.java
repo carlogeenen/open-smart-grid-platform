@@ -71,8 +71,9 @@ public class ConfigurationService {
         this.domainHelperService.isAllowed(organisation, device, DeviceFunction.SET_ADMINISTRATIVE_STATUS);
 
         LOGGER.info(
-                "enqueueSetAdministrativeStatus called with organisation {} and device {}, set administrative status to {}",
-                organisationIdentification, deviceIdentification, requestData);
+                "enqueueSetAdministrativeStatus called with organisation {} and device {}, set administrative status to {}, and message to {}",
+                organisationIdentification, deviceIdentification, requestData.getAdministrativeStatusType(),
+                requestData.getMessage());
 
         final String correlationUid = this.correlationIdProviderService.getCorrelationId(organisationIdentification,
                 deviceIdentification);
