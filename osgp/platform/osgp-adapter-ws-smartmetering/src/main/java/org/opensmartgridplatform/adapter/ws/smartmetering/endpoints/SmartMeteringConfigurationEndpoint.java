@@ -11,14 +11,6 @@ package org.opensmartgridplatform.adapter.ws.smartmetering.endpoints;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ws.server.endpoint.annotation.Endpoint;
-import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
-import org.springframework.ws.server.endpoint.annotation.RequestPayload;
-import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-
 import org.opensmartgridplatform.adapter.ws.domain.entities.ResponseData;
 import org.opensmartgridplatform.adapter.ws.endpointinterceptors.MessagePriority;
 import org.opensmartgridplatform.adapter.ws.endpointinterceptors.OrganisationIdentification;
@@ -123,6 +115,13 @@ import org.opensmartgridplatform.domain.core.valueobjects.smartmetering.UpdateFi
 import org.opensmartgridplatform.shared.exceptionhandling.ComponentType;
 import org.opensmartgridplatform.shared.exceptionhandling.OsgpException;
 import org.opensmartgridplatform.shared.wsheaderattribute.priority.MessagePriorityEnum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
+import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
+import org.springframework.ws.server.endpoint.annotation.RequestPayload;
+import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 @Endpoint
 public class SmartMeteringConfigurationEndpoint extends SmartMeteringEndpoint {
@@ -145,15 +144,11 @@ public class SmartMeteringConfigurationEndpoint extends SmartMeteringEndpoint {
      * Starts the proces of retrieving the firmware version(s) of the device
      * specified in the {@link GetFirmwareVersionRequest}
      *
-     * @param organisationIdentification
-     *            {@link String} containing the identification of the
-     *            organization
-     * @param request
-     *            the {@link GetFirmwareVersionRequest}
-     * @param messagePriority
-     *            the message priority
-     * @param scheduleTime
-     *            the time the message is scheduled
+     * @param organisationIdentification {@link String} containing the
+     *                                   identification of the organization
+     * @param request                    the {@link GetFirmwareVersionRequest}
+     * @param messagePriority            the message priority
+     * @param scheduleTime               the time the message is scheduled
      * @return the {@link GetFirmwareVersionAsyncResponse} containing the
      *         correlation id
      * @throws OsgpException
@@ -190,17 +185,15 @@ public class SmartMeteringConfigurationEndpoint extends SmartMeteringEndpoint {
      * returns {@link GetFirmwareVersionResponse} containing those firmware
      * versions.
      *
-     * @param organisationIdentification
-     *            {@link String} containing the identification of the
-     *            organization
-     * @param request
-     *            {@link GetFirmwareVersionAsyncRequest} containing the
-     *            correlation id as the response identifier
-     * @return {@link GetFirmwareVersionResponse} containing the firmware
-     *         version(s) for the device.
-     * @throws OsgpException
-     *             is thrown when the correlationId cannot be found in the
-     *             database
+     * @param organisationIdentification {@link String} containing the
+     *                                   identification of the organization
+     * @param request                    {@link GetFirmwareVersionAsyncRequest}
+     *                                   containing the correlation id as the
+     *                                   response identifier
+     * @return {@link GetFirmwareVersionResponse} containing the firmware version(s)
+     *         for the device.
+     * @throws OsgpException is thrown when the correlationId cannot be found in the
+     *                       database
      */
     @PayloadRoot(localPart = "GetFirmwareVersionAsyncRequest", namespace = SMARTMETER_CONFIGURATION_NAMESPACE)
     @ResponsePayload
@@ -312,9 +305,9 @@ public class SmartMeteringConfigurationEndpoint extends SmartMeteringEndpoint {
             @RequestPayload final SetAdministrativeStatusRequest request, @MessagePriority final String messagePriority,
             @ScheduleTime final String scheduleTime, @ResponseUrl final String responseUrl) throws OsgpException {
 
-        final org.opensmartgridplatform.domain.core.valueobjects.smartmetering.AdministrativeStatusType dataRequest = this.configurationMapper
+        final org.opensmartgridplatform.domain.core.valueobjects.smartmetering.AdministrativeStatusTypeData dataRequest = this.configurationMapper
                 .map(request.getEnabled(),
-                        org.opensmartgridplatform.domain.core.valueobjects.smartmetering.AdministrativeStatusType.class);
+                        org.opensmartgridplatform.domain.core.valueobjects.smartmetering.AdministrativeStatusTypeData.class);
 
         final String correlationUid = this.configurationService.requestSetAdministrativeStatus(
                 organisationIdentification, request.getDeviceIdentification(), dataRequest,
@@ -407,7 +400,8 @@ public class SmartMeteringConfigurationEndpoint extends SmartMeteringEndpoint {
         final SetSpecialDaysAsyncResponse response = new SetSpecialDaysAsyncResponse();
 
         final org.opensmartgridplatform.domain.core.valueobjects.smartmetering.SpecialDaysRequest dataRequest = this.configurationMapper
-                .map(request, org.opensmartgridplatform.domain.core.valueobjects.smartmetering.SpecialDaysRequest.class);
+                .map(request,
+                        org.opensmartgridplatform.domain.core.valueobjects.smartmetering.SpecialDaysRequest.class);
 
         final String correlationUid = this.configurationService.enqueueSetSpecialDaysRequest(organisationIdentification,
                 dataRequest.getDeviceIdentification(), dataRequest,

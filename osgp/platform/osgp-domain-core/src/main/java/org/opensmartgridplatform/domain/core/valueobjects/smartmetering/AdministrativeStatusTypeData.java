@@ -15,6 +15,7 @@ public class AdministrativeStatusTypeData implements ActionRequest {
     private static final long serialVersionUID = -1888622740375028081L;
 
     private AdministrativeStatusType administrativeStatusType;
+    private String message;
 
     public AdministrativeStatusType getAdministrativeStatusType() {
         return this.administrativeStatusType;
@@ -22,6 +23,14 @@ public class AdministrativeStatusTypeData implements ActionRequest {
 
     public void setAdministrativeStatusType(final AdministrativeStatusType administrativeStatusType) {
         this.administrativeStatusType = administrativeStatusType;
+    }
+
+    public String getMessage() {
+        return this.message;
+    }
+
+    public void setMessage(final String message) {
+        this.message = message;
     }
 
     @Override

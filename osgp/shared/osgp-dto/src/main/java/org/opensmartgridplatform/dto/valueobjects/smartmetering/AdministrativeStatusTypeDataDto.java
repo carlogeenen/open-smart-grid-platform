@@ -8,7 +8,6 @@
 package org.opensmartgridplatform.dto.valueobjects.smartmetering;
 
 public class AdministrativeStatusTypeDataDto implements ActionRequestDto {
-
     private static final long serialVersionUID = -5211585074109860057L;
 
     private AdministrativeStatusTypeDto administrativeStatusType;
@@ -22,12 +21,12 @@ public class AdministrativeStatusTypeDataDto implements ActionRequestDto {
         return this.administrativeStatusType;
     }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return this.message;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public void setMessage(final String message) {
+        this.message = message;
+    }
 
 }

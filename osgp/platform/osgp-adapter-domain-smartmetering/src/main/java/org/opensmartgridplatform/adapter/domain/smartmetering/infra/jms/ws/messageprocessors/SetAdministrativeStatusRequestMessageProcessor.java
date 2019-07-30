@@ -9,7 +9,7 @@ package org.opensmartgridplatform.adapter.domain.smartmetering.infra.jms.ws.mess
 
 import org.opensmartgridplatform.adapter.domain.smartmetering.application.services.ConfigurationService;
 import org.opensmartgridplatform.adapter.domain.smartmetering.infra.jms.BaseRequestMessageProcessor;
-import org.opensmartgridplatform.domain.core.valueobjects.smartmetering.AdministrativeStatusType;
+import org.opensmartgridplatform.domain.core.valueobjects.smartmetering.AdministrativeStatusTypeData;
 import org.opensmartgridplatform.shared.exceptionhandling.FunctionalException;
 import org.opensmartgridplatform.shared.infra.jms.DeviceMessageMetadata;
 import org.opensmartgridplatform.shared.infra.jms.MessageProcessorMap;
@@ -27,7 +27,7 @@ public class SetAdministrativeStatusRequestMessageProcessor extends BaseRequestM
 
     @Autowired
     protected SetAdministrativeStatusRequestMessageProcessor(
-            @Qualifier("domainSmartMeteringWebServiceRequestMessageProcessorMap") MessageProcessorMap messageProcessorMap) {
+            @Qualifier("domainSmartMeteringWebServiceRequestMessageProcessorMap") final MessageProcessorMap messageProcessorMap) {
         super(messageProcessorMap, MessageType.SET_ADMINISTRATIVE_STATUS);
     }
 
@@ -35,7 +35,7 @@ public class SetAdministrativeStatusRequestMessageProcessor extends BaseRequestM
     protected void handleMessage(final DeviceMessageMetadata deviceMessageMetadata, final Object dataObject)
             throws FunctionalException {
 
-        final AdministrativeStatusType administrativeStatusType = (AdministrativeStatusType) dataObject;
+        final AdministrativeStatusTypeData administrativeStatusType = (AdministrativeStatusTypeData) dataObject;
 
         this.configurationService.setAdministrativeStatus(deviceMessageMetadata, administrativeStatusType);
     }

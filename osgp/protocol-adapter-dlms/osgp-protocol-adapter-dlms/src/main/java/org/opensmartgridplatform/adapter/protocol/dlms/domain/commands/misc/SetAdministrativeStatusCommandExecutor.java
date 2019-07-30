@@ -15,7 +15,6 @@ import org.openmuc.jdlms.AttributeAddress;
 import org.openmuc.jdlms.ObisCode;
 import org.openmuc.jdlms.SetParameter;
 import org.openmuc.jdlms.datatypes.DataObject;
-import org.opensmartgridplatform.adapter.protocol.dlms.application.mapping.ConfigurationMapper;
 import org.opensmartgridplatform.adapter.protocol.dlms.domain.commands.AbstractCommandExecutor;
 import org.opensmartgridplatform.adapter.protocol.dlms.domain.commands.utils.JdlmsObjectToStringUtil;
 import org.opensmartgridplatform.adapter.protocol.dlms.domain.entities.DlmsDevice;
@@ -29,7 +28,6 @@ import org.opensmartgridplatform.dto.valueobjects.smartmetering.AdministrativeSt
 import org.opensmartgridplatform.shared.exceptionhandling.OsgpException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component()
@@ -77,7 +75,6 @@ public class SetAdministrativeStatusCommandExecutor
 //                .newEnumerateData(this.configurationMapper.map(administrativeStatusType, Integer.class));
 //        final SetParameter setParameter = new SetParameter(attributeAddress, administrativeStatusTypeValue);
 
-//		final DataObject p1MessageValue = DataObject.newOctetStringData(administrativeStatusType.name().toString().getBytes());
         final DataObject p1MessageValue = DataObject.newOctetStringData(message.getBytes());
         final SetParameter setParameter = new SetParameter(attributeAddress, p1MessageValue);
 

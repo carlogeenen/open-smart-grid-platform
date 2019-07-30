@@ -11,10 +11,10 @@ import org.opensmartgridplatform.adapter.ws.smartmetering.infra.jms.SmartMeterin
 import org.opensmartgridplatform.adapter.ws.smartmetering.infra.jms.SmartMeteringRequestMessageSender;
 import org.opensmartgridplatform.domain.core.entities.Device;
 import org.opensmartgridplatform.domain.core.entities.Organisation;
-import org.opensmartgridplatform.shared.validation.Identification;
 import org.opensmartgridplatform.domain.core.valueobjects.DeviceFunction;
 import org.opensmartgridplatform.domain.core.valueobjects.smartmetering.ActivityCalendar;
 import org.opensmartgridplatform.domain.core.valueobjects.smartmetering.AdministrativeStatusType;
+import org.opensmartgridplatform.domain.core.valueobjects.smartmetering.AdministrativeStatusTypeData;
 import org.opensmartgridplatform.domain.core.valueobjects.smartmetering.AlarmNotifications;
 import org.opensmartgridplatform.domain.core.valueobjects.smartmetering.DefinableLoadProfileConfigurationData;
 import org.opensmartgridplatform.domain.core.valueobjects.smartmetering.GetConfigurationObjectRequest;
@@ -31,6 +31,7 @@ import org.opensmartgridplatform.shared.domain.services.CorrelationIdProviderSer
 import org.opensmartgridplatform.shared.exceptionhandling.FunctionalException;
 import org.opensmartgridplatform.shared.infra.jms.DeviceMessageMetadata;
 import org.opensmartgridplatform.shared.infra.jms.MessageType;
+import org.opensmartgridplatform.shared.validation.Identification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,15 +54,15 @@ public class ConfigurationService {
     private SmartMeteringRequestMessageSender smartMeteringRequestMessageSender;
 
     public String requestSetAdministrativeStatus(final String organisationIdentification,
-            final String deviceIdentification, final AdministrativeStatusType requestData, final int messagePriority,
-            final Long scheduleTime) throws FunctionalException {
+            final String deviceIdentification, final AdministrativeStatusTypeData requestData,
+            final int messagePriority, final Long scheduleTime) throws FunctionalException {
         return this.enqueueSetAdministrativeStatus(organisationIdentification, deviceIdentification, requestData,
                 messagePriority, scheduleTime);
     }
 
     public String enqueueSetAdministrativeStatus(@Identification final String organisationIdentification,
             @Identification final String deviceIdentification,
-            @Identification final AdministrativeStatusType requestData, final int messagePriority,
+            @Identification final AdministrativeStatusTypeData requestData, final int messagePriority,
             final Long scheduleTime) throws FunctionalException {
 
         final Organisation organisation = this.domainHelperService.findOrganisation(organisationIdentification);
@@ -89,24 +90,22 @@ public class ConfigurationService {
     }
 
     /**
-     * Checks if the organization (identified by the organisationIdentification)
-     * is allowed to execute this function. Creates a correlation id, sends the
-     * get firmware request from the ws-adapter to the domain-adapter and
-     * returns the correlation id.
+     * Checks if the organization (identified by the organisationIdentification) is
+     * allowed to execute this function. Creates a correlation id, sends the get
+     * firmware request from the ws-adapter to the domain-adapter and returns the
+     * correlation id.
      *
-     * @param organisationIdentification
-     *            {@link String} containing the organization identification
-     * @param deviceIdentification
-     *            {@link String} containing the device identification
-     * @param messagePriority
-     *            contains the message priority
-     * @param scheduleTime
-     *            contains the time when the message is scheduled to be executed
+     * @param organisationIdentification {@link String} containing the organization
+     *                                   identification
+     * @param deviceIdentification       {@link String} containing the device
+     *                                   identification
+     * @param messagePriority            contains the message priority
+     * @param scheduleTime               contains the time when the message is
+     *                                   scheduled to be executed
      * @return the correlation id belonging to the request
-     * @throws FunctionalException
-     *             is thrown when either the device or organization cannot be
-     *             found or the organization is not allowed to execute the
-     *             function
+     * @throws FunctionalException is thrown when either the device or organization
+     *                             cannot be found or the organization is not
+     *                             allowed to execute the function
      */
     public String enqueueGetFirmwareRequest(@Identification final String organisationIdentification,
             @Identification final String deviceIdentification, final int messagePriority, final Long scheduleTime)
@@ -527,24 +526,22 @@ public class ConfigurationService {
     }
 
     /**
-     * Checks if the organization (identified by the organisationIdentification)
-     * is allowed to execute this function. Creates a correlation id, sends the
-     * generate and replace request from the ws-adapter to the domain-adapter
-     * and returns the correlation id.
+     * Checks if the organization (identified by the organisationIdentification) is
+     * allowed to execute this function. Creates a correlation id, sends the
+     * generate and replace request from the ws-adapter to the domain-adapter and
+     * returns the correlation id.
      *
-     * @param organisationIdentification
-     *            {@link String} containing the organization identification
-     * @param deviceIdentification
-     *            {@link String} containing the device identification
-     * @param messagePriority
-     *            contains the message priority
-     * @param scheduleTime
-     *            contains the time when the message is scheduled to be executed
+     * @param organisationIdentification {@link String} containing the organization
+     *                                   identification
+     * @param deviceIdentification       {@link String} containing the device
+     *                                   identification
+     * @param messagePriority            contains the message priority
+     * @param scheduleTime               contains the time when the message is
+     *                                   scheduled to be executed
      * @return the correlation id belonging to the request
-     * @throws FunctionalException
-     *             is thrown when either the device or organization cannot be
-     *             found or the organization is not allowed to execute the
-     *             function
+     * @throws FunctionalException is thrown when either the device or organization
+     *                             cannot be found or the organization is not
+     *                             allowed to execute the function
      */
     public String enqueueGenerateAndReplaceKeysRequest(@Identification final String organisationIdentification,
             @Identification final String deviceIdentification, final int messagePriority, final Long scheduleTime)
