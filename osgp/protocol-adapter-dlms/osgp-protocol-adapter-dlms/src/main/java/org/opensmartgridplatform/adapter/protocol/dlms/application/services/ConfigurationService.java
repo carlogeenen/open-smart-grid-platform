@@ -34,6 +34,7 @@ import org.opensmartgridplatform.adapter.protocol.dlms.domain.factories.DlmsConn
 import org.opensmartgridplatform.adapter.protocol.dlms.exceptions.ProtocolAdapterException;
 import org.opensmartgridplatform.dto.valueobjects.FirmwareVersionDto;
 import org.opensmartgridplatform.dto.valueobjects.smartmetering.ActivityCalendarDto;
+import org.opensmartgridplatform.dto.valueobjects.smartmetering.AdministrativeStatusDto;
 import org.opensmartgridplatform.dto.valueobjects.smartmetering.AdministrativeStatusTypeDto;
 import org.opensmartgridplatform.dto.valueobjects.smartmetering.AlarmNotificationsDto;
 import org.opensmartgridplatform.dto.valueobjects.smartmetering.ChannelElementValuesDto;
@@ -184,12 +185,12 @@ public class ConfigurationService {
     }
 
     public void requestSetAdministrativeStatus(final DlmsConnectionManager conn, final DlmsDevice device,
-            final AdministrativeStatusTypeDto administrativeStatusType) throws ProtocolAdapterException {
+            final AdministrativeStatusDto administrativeStatusType) throws ProtocolAdapterException {
 
         LOGGER.info("Device for Set Administrative Status is: {}", device);
 
         final AccessResultCode accessResultCode = this.setAdministrativeStatusCommandExecutor
-                .execute(conn, device, administrativeStatusType);
+                .execute(conn, device, administrativeStatusType.getAdministrativeStatusTypeDto(), administrativeStatusType.getMessage());
         if (AccessResultCode.SUCCESS != accessResultCode) {
             throw new ProtocolAdapterException(
                     "AccessResultCode for set administrative status was not SUCCESS: " + accessResultCode);

@@ -12,6 +12,7 @@ public class AdministrativeStatusTypeDataDto implements ActionRequestDto {
     private static final long serialVersionUID = -5211585074109860057L;
 
     private AdministrativeStatusTypeDto administrativeStatusType;
+    private String message;
 
     public AdministrativeStatusTypeDataDto(final AdministrativeStatusTypeDto administrativeStatusType) {
         this.administrativeStatusType = administrativeStatusType;
@@ -20,5 +21,13 @@ public class AdministrativeStatusTypeDataDto implements ActionRequestDto {
     public AdministrativeStatusTypeDto getAdministrativeStatusType() {
         return this.administrativeStatusType;
     }
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 }

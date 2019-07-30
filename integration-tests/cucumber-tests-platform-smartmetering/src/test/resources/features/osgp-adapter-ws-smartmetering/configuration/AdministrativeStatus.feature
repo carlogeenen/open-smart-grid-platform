@@ -24,8 +24,8 @@ Feature: SmartMetering Configuration - Administrative Status
 
   Scenario: Set administrative text
     When the set administrative status request is received
-      | DeviceIdentification     | TEST1024000000001 |
-      | AdministrativeStatusType | ON                |
-      | Message                  | test P1           |
+      | DeviceIdentification     | TEST1024000000001              |
+      | AdministrativeStatusType | ON                             |
+      | Message                  | test P1 message with Cucumber! |
     Then the administrative status should be set on the device
       | DeviceIdentification | TEST1024000000001 |

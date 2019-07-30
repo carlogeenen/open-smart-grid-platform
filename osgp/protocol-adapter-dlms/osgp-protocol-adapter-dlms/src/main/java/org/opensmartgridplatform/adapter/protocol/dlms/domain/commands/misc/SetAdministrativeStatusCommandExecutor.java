@@ -26,6 +26,7 @@ import org.opensmartgridplatform.dto.valueobjects.smartmetering.ActionRequestDto
 import org.opensmartgridplatform.dto.valueobjects.smartmetering.ActionResponseDto;
 import org.opensmartgridplatform.dto.valueobjects.smartmetering.AdministrativeStatusTypeDataDto;
 import org.opensmartgridplatform.dto.valueobjects.smartmetering.AdministrativeStatusTypeDto;
+import org.opensmartgridplatform.shared.exceptionhandling.OsgpException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +39,8 @@ public class SetAdministrativeStatusCommandExecutor
     private static final Logger LOGGER = LoggerFactory.getLogger(SetAdministrativeStatusCommandExecutor.class);
 
     private static final int CLASS_ID = 1;
-    private static final ObisCode OBIS_CODE = new ObisCode("0.1.94.31.0.255");
+    private static final ObisCode OBIS_CODE_P1_MESSAGE = new ObisCode("0.0.96.13.0.255");
     private static final int ATTRIBUTE_ID = 2;
-
-    @Autowired
-    private ConfigurationMapper configurationMapper;
 
     public SetAdministrativeStatusCommandExecutor() {
         super(AdministrativeStatusTypeDataDto.class);
@@ -53,8 +51,7 @@ public class SetAdministrativeStatusCommandExecutor
             throws ProtocolAdapterException {
 
         this.checkActionRequestType(bundleInput);
-        final AdministrativeStatusTypeDataDto administrativeStatusTypeDataDto =
-                (AdministrativeStatusTypeDataDto) bundleInput;
+        final AdministrativeStatusTypeDataDto administrativeStatusTypeDataDto = (AdministrativeStatusTypeDataDto) bundleInput;
 
         return administrativeStatusTypeDataDto.getAdministrativeStatusType();
     }
@@ -67,28 +64,37 @@ public class SetAdministrativeStatusCommandExecutor
         return new ActionResponseDto("Set administrative status was successful");
     }
 
-    @Override
     public AccessResultCode execute(final DlmsConnectionManager conn, final DlmsDevice device,
-            final AdministrativeStatusTypeDto administrativeStatusType) throws ProtocolAdapterException {
+            final AdministrativeStatusTypeDto administrativeStatusType, final String message)
+            throws ProtocolAdapterException {
 
         LOGGER.info(
                 "Set administrative status by issuing get request for class id: {}, obis code: {}, attribute id: {}",
-                CLASS_ID, OBIS_CODE, ATTRIBUTE_ID);
+                CLASS_ID, OBIS_CODE_P1_MESSAGE, ATTRIBUTE_ID);
 
-        final AttributeAddress attributeAddress = new AttributeAddress(CLASS_ID, OBIS_CODE, ATTRIBUTE_ID);
-        final DataObject value = DataObject
-                .newEnumerateData(this.configurationMapper.map(administrativeStatusType, Integer.class));
+        final AttributeAddress attributeAddress = new AttributeAddress(CLASS_ID, OBIS_CODE_P1_MESSAGE, ATTRIBUTE_ID);
+//        final DataObject administrativeStatusTypeValue = DataObject
+//                .newEnumerateData(this.configurationMapper.map(administrativeStatusType, Integer.class));
+//        final SetParameter setParameter = new SetParameter(attributeAddress, administrativeStatusTypeValue);
 
-        final SetParameter setParameter = new SetParameter(attributeAddress, value);
+//		final DataObject p1MessageValue = DataObject.newOctetStringData(administrativeStatusType.name().toString().getBytes());
+        final DataObject p1MessageValue = DataObject.newOctetStringData(message.getBytes());
+        final SetParameter setParameter = new SetParameter(attributeAddress, p1MessageValue);
 
-        conn.getDlmsMessageListener().setDescription(
-                "SetAdminstrativeStatus to " + administrativeStatusType + ", set attribute: " + JdlmsObjectToStringUtil
-                        .describeAttributes(attributeAddress));
+        conn.getDlmsMessageListener().setDescription("Set P1 message: " + administrativeStatusType + " to attribute: "
+                + JdlmsObjectToStringUtil.describeAttributes(attributeAddress));
 
         try {
             return conn.getConnection().set(setParameter);
         } catch (final IOException e) {
             throw new ConnectionException(e);
         }
+    }
+
+    @Override
+    public AccessResultCode execute(final DlmsConnectionManager conn, final DlmsDevice device,
+            final AdministrativeStatusTypeDto object) throws OsgpException {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
