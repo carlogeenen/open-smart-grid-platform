@@ -590,7 +590,13 @@
       <xsd:sequence>
         <xsd:element name="DeviceIdentification" type="common:DeviceIdentification" />
         <xsd:element name="Enabled" type="tns:AdministrativeStatusType" />
-        <xsd:element name="Message" type="xsd:String" />
+        <xsd:element name="Message" minOccurs="1" maxOccurs="1">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="2048" />
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
