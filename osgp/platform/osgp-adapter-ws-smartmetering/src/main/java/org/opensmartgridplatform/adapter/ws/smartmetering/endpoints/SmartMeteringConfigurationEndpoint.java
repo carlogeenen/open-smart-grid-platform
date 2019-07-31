@@ -304,7 +304,7 @@ public class SmartMeteringConfigurationEndpoint extends SmartMeteringEndpoint {
             @OrganisationIdentification final String organisationIdentification,
             @RequestPayload final SetAdministrativeStatusRequest request, @MessagePriority final String messagePriority,
             @ScheduleTime final String scheduleTime, @ResponseUrl final String responseUrl) throws OsgpException {
-        // dataRequest is null, request is filled correct!
+
         final org.opensmartgridplatform.domain.core.valueobjects.smartmetering.AdministrativeStatusTypeData dataRequest = this.configurationMapper
                 .map(request,
                         org.opensmartgridplatform.domain.core.valueobjects.smartmetering.AdministrativeStatusTypeData.class);

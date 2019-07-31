@@ -222,12 +222,12 @@ public class ConfigurationService {
         final SmartMeter smartMeteringDevice = this.domainHelperService
                 .findSmartMeter(deviceMessageMetadata.getDeviceIdentification());
 
-        final AdministrativeStatusTypeDataDto administrativeStatusDto = this.configurationMapper
+        final AdministrativeStatusTypeDataDto administrativeStatusTypeDataDto = this.configurationMapper
                 .map(administrativeStatusTypeData, AdministrativeStatusTypeDataDto.class);
 
         final RequestMessage requestMessage = new RequestMessage(deviceMessageMetadata.getCorrelationUid(),
                 deviceMessageMetadata.getOrganisationIdentification(), deviceMessageMetadata.getDeviceIdentification(),
-                smartMeteringDevice.getIpAddress(), administrativeStatusDto);
+                smartMeteringDevice.getIpAddress(), administrativeStatusTypeDataDto);
         this.osgpCoreRequestMessageSender.send(requestMessage, deviceMessageMetadata.getMessageType(),
                 deviceMessageMetadata.getMessagePriority(), deviceMessageMetadata.getScheduleTime());
     }

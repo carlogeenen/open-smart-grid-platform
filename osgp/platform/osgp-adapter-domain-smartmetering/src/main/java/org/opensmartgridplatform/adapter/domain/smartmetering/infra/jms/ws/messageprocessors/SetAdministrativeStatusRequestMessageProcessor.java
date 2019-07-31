@@ -35,9 +35,9 @@ public class SetAdministrativeStatusRequestMessageProcessor extends BaseRequestM
     protected void handleMessage(final DeviceMessageMetadata deviceMessageMetadata, final Object dataObject)
             throws FunctionalException {
 
-        final AdministrativeStatusTypeData administrativeStatusType = (AdministrativeStatusTypeData) dataObject;
+        final AdministrativeStatusTypeData administrativeStatusTypeData = (AdministrativeStatusTypeData) dataObject;
 
-        this.configurationService.setAdministrativeStatus(deviceMessageMetadata, administrativeStatusType);
+        this.configurationService.setAdministrativeStatus(deviceMessageMetadata, administrativeStatusTypeData);
     }
 
 }

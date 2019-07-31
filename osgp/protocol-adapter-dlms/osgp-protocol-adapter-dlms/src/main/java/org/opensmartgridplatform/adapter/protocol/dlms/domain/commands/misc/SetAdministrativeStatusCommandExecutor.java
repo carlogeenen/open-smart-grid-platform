@@ -71,14 +71,11 @@ public class SetAdministrativeStatusCommandExecutor
                 CLASS_ID, OBIS_CODE_P1_MESSAGE, ATTRIBUTE_ID);
 
         final AttributeAddress attributeAddress = new AttributeAddress(CLASS_ID, OBIS_CODE_P1_MESSAGE, ATTRIBUTE_ID);
-//        final DataObject administrativeStatusTypeValue = DataObject
-//                .newEnumerateData(this.configurationMapper.map(administrativeStatusType, Integer.class));
-//        final SetParameter setParameter = new SetParameter(attributeAddress, administrativeStatusTypeValue);
 
         final DataObject p1MessageValue = DataObject.newOctetStringData(message.getBytes());
         final SetParameter setParameter = new SetParameter(attributeAddress, p1MessageValue);
 
-        conn.getDlmsMessageListener().setDescription("Set P1 message: " + administrativeStatusType + " to attribute: "
+        conn.getDlmsMessageListener().setDescription("Set P1 message: " + message + " to attribute: "
                 + JdlmsObjectToStringUtil.describeAttributes(attributeAddress));
 
         try {

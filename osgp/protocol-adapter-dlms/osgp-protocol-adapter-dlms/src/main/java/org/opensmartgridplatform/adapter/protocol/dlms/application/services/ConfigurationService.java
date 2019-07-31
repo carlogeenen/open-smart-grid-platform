@@ -185,12 +185,12 @@ public class ConfigurationService {
     }
 
     public void requestSetAdministrativeStatus(final DlmsConnectionManager conn, final DlmsDevice device,
-            final AdministrativeStatusTypeDataDto administrativeStatusType) throws ProtocolAdapterException {
+            final AdministrativeStatusTypeDataDto administrativeStatusTypeDataDto) throws ProtocolAdapterException {
 
         LOGGER.info("Device for Set Administrative Status is: {}", device);
 
         final AccessResultCode accessResultCode = this.setAdministrativeStatusCommandExecutor.execute(conn, device,
-                administrativeStatusType.getAdministrativeStatusType(), administrativeStatusType.getMessage());
+                administrativeStatusTypeDataDto.getAdministrativeStatusType(), administrativeStatusTypeDataDto.getMessage());
         if (AccessResultCode.SUCCESS != accessResultCode) {
             throw new ProtocolAdapterException(
                     "AccessResultCode for set administrative status was not SUCCESS: " + accessResultCode);
