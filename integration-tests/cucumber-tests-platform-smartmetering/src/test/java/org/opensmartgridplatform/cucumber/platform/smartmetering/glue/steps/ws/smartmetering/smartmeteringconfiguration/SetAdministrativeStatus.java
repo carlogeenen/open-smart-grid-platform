@@ -13,10 +13,6 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import org.opensmartgridplatform.adapter.ws.schema.smartmetering.common.OsgpResultType;
 import org.opensmartgridplatform.adapter.ws.schema.smartmetering.configuration.SetAdministrativeStatusAsyncRequest;
 import org.opensmartgridplatform.adapter.ws.schema.smartmetering.configuration.SetAdministrativeStatusAsyncResponse;
@@ -26,6 +22,9 @@ import org.opensmartgridplatform.cucumber.core.ScenarioContext;
 import org.opensmartgridplatform.cucumber.platform.smartmetering.PlatformSmartmeteringKeys;
 import org.opensmartgridplatform.cucumber.platform.smartmetering.support.ws.smartmetering.configuration.SetAdministrativeStatusRequestFactory;
 import org.opensmartgridplatform.cucumber.platform.smartmetering.support.ws.smartmetering.configuration.SmartMeteringConfigurationClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -49,6 +48,8 @@ public class SetAdministrativeStatus {
         assertNotNull("Set administrative status response should not be null", setAdministrativeStatusAsyncResponse);
         ScenarioContext.current().put(PlatformSmartmeteringKeys.KEY_CORRELATION_UID,
                 setAdministrativeStatusAsyncResponse.getCorrelationUid());
+        ScenarioContext.current().put(PlatformSmartmeteringKeys.DEVICE_IDENTIFICATION,
+                setAdministrativeStatusRequest.getDeviceIdentification());
     }
 
     @Then("^the administrative status should be set on the device$")
