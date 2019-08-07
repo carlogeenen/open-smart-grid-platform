@@ -26,6 +26,6 @@ Feature: SmartMetering Configuration - Administrative Status
     When the set administrative status request is received
       | DeviceIdentification     | E0026000026406115              |
       | AdministrativeStatusType | ON                             |
-      | Message                  | test P1 message with Cucumber! |
+      | Message                  | test P1 message voor server |
     Then the administrative status should be set on the device
-      | DeviceIdentification | TEST1024000000001 |
+      | DeviceIdentification | E0026000026406115 |
