@@ -94,8 +94,8 @@ public class CoreDatabase {
 
     /**
      * This method is used to create default data not directly related to the
-     * specific tests. For example: The test-org organization which is used to
-     * send authorized requests to the platform.
+     * specific tests. For example: The test-org organization which is used to send
+     * authorized requests to the platform.
      */
     @Transactional("txMgrCore")
     public void insertDefaultData() {
@@ -136,7 +136,7 @@ public class CoreDatabase {
 
     private void batchDeleteAll() {
         LOGGER.info("Starting batchDeleteAll()");
-        this.deviceAuthorizationRepository.deleteAllInBatch();
+        // this.deviceAuthorizationRepository.deleteAllInBatch();
         this.deviceLogItemRepository.deleteAllInBatch();
         this.scheduledTaskRepository.deleteAllInBatch();
         this.eanRepository.deleteAllEans();
@@ -144,21 +144,21 @@ public class CoreDatabase {
         this.deviceFirmwareFileRepository.deleteAllInBatch();
         this.deviceFirmwareModuleRepository.deleteAllInBatch();
         this.eventRepository.deleteAllInBatch();
-        this.smartMeterRepository.deleteAllInBatch();
+        // this.smartMeterRepository.deleteAllInBatch();
         this.relayStatusRepository.deleteAllInBatch();
         this.ssldRepository.deleteAllInBatch();
-        this.deviceRepository.deleteAllInBatch();
+        // this.deviceRepository.deleteAllInBatch();
         this.lightMeasurementDeviceRepository.deleteAllInBatch();
         this.firmwareFileFirmwareModuleRepository.deleteAllInBatch();
         this.firmwareFileRepository.deleteAllInBatch();
         this.deviceModelRepository.deleteAllInBatch();
         this.manufacturerRepository.deleteAllInBatch();
-        this.organisationRepository.deleteAllInBatch();
+        // this.organisationRepository.deleteAllInBatch();
     }
 
     private void normalDeleteAll() {
         LOGGER.info("Starting normalDeleteAll()");
-        this.deviceAuthorizationRepository.deleteAll();
+        // this.deviceAuthorizationRepository.deleteAll();
         this.deviceLogItemRepository.deleteAll();
         this.scheduledTaskRepository.deleteAll();
         this.eanRepository.deleteAllEans();
@@ -166,15 +166,15 @@ public class CoreDatabase {
         this.deviceFirmwareFileRepository.deleteAll();
         this.deviceFirmwareModuleRepository.deleteAll();
         this.eventRepository.deleteAll();
-        this.smartMeterRepository.deleteAll();
+        // this.smartMeterRepository.deleteAll();
         this.relayStatusRepository.deleteAll();
         this.ssldRepository.deleteAll();
-        this.deviceRepository.deleteAll();
+        // this.deviceRepository.deleteAll();
         this.lightMeasurementDeviceRepository.deleteAll();
         this.firmwareFileFirmwareModuleRepository.deleteAll();
         this.firmwareFileRepository.deleteAll();
         this.deviceModelRepository.deleteAll();
         this.manufacturerRepository.deleteAll();
-        this.organisationRepository.deleteAll();
+        // this.organisationRepository.deleteAll();
     }
 }

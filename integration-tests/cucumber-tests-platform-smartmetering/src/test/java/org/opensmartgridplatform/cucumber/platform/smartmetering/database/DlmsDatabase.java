@@ -68,8 +68,8 @@ public class DlmsDatabase {
     @Transactional(transactionManager = "txMgrDlms")
     public void prepareDatabaseForScenario() {
 
-        this.dlmsDSecurityKeyRepo.deleteAllInBatch();
-        this.dlmsDeviceRepo.deleteAllInBatch();
+        // this.dlmsDSecurityKeyRepo.deleteAllInBatch();
+        // this.dlmsDeviceRepo.deleteAllInBatch();
         this.responseDataRepo.deleteAllInBatch();
         this.responseUrlDataRepo.deleteAllInBatch();
 
